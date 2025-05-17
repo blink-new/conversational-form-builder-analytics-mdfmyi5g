@@ -137,9 +137,49 @@ const FormBuilder = () => {
                     {(form.questions[selectedQuestionIndex]?.type === 'singleChoice' || 
                       form.questions[selectedQuestionIndex]?.type === 'multipleChoice') && (
 // ... existing code ...
+                  <TabsContent value="validation" className="m-0">
+                  <p className="text-sm text-slate">
+                    Configure validation rules for this question.
+                  </p>
+                  
+                  {/* Validation settings will depend on the question type */}
                   {['text', 'longText'].includes(form.questions[selectedQuestionIndex]?.type || '') && (
-// ... existing code ...
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <Label htmlFor="max-length">Maximum Length</Label>
+                        <Input 
+                          id="max-length" 
+                          type="number" 
+                          placeholder="No limit"
+                          className="mt-1" 
+                        />
+                      </div>
+                    </div>
+                  )}
+                  
                   {form.questions[selectedQuestionIndex]?.type === 'number' && (
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <Label htmlFor="min-value">Minimum Value</Label>
+                        <Input 
+                          id="min-value" 
+                          type="number" 
+                          placeholder="No minimum"
+                          className="mt-1" 
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="max-value">Maximum Value</Label>
+                        <Input 
+                          id="max-value" 
+                          type="number" 
+                          placeholder="No maximum"
+                          className="mt-1" 
+                        />
+                      </div>
+                    </div>
+                  )}
+                </TabsContent>
 // ... existing code ...
                     {selectedQuestionIndex < (form.questions?.length || 0) - 1 && (
 // ... existing code ...
