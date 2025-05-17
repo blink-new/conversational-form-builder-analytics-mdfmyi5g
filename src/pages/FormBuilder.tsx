@@ -136,7 +136,38 @@ const FormBuilder = () => {
                     
                     {(form.questions[selectedQuestionIndex]?.type === 'singleChoice' || 
                       form.questions[selectedQuestionIndex]?.type === 'multipleChoice') && (
-
+                      <div>
+                        <Label className="mb-2 block">Options</Label>
+                        <div className="space-y-2">
+                          {form.questions[selectedQuestionIndex].choices?.map((choice, cIndex) => (
+                            <div key={choice.id} className="flex items-center gap-2">
+                              <GripVertical className="h-4 w-4 text-slate/60 cursor-move" />
+                              <Input 
+                                value={choice.label} 
+                                className="flex-1" 
+                                placeholder={`Option ${cIndex + 1}`}
+                                // Add onChange handler for choice label
+                              />
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                className="h-8 w-8 text-slate/60 hover:text-destructive"
+                                // Add onClick handler to remove choice
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          ))}
+                          <Button 
+                            variant="outline" 
+                            className="w-full mt-2 border-dashed"
+                            // Add onClick handler to add new choice
+                          >
+                            <Plus className="h-4 w-4 mr-2" />
+                            Add Option
+                          </Button>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </TabsContent>
