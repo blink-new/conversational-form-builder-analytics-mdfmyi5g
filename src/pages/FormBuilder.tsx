@@ -136,8 +136,12 @@ const FormBuilder = () => {
                     
                     {(form.questions[selectedQuestionIndex]?.type === 'singleChoice' || 
                       form.questions[selectedQuestionIndex]?.type === 'multipleChoice') && (
-// ... existing code ...
-                  <TabsContent value="validation" className="m-0">
+
+                    )}
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="validation" className="m-0">
                   <p className="text-sm text-slate">
                     Configure validation rules for this question.
                   </p>
@@ -180,10 +184,32 @@ const FormBuilder = () => {
                     </div>
                   )}
                 </TabsContent>
-// ... existing code ...
+                
+                <TabsContent value="logic" className="m-0">
+
+                </TabsContent>
+              </div>
+              
+              <div className="p-4 border-t mt-auto">
+                <div className="flex justify-between">
+                  <Button variant="ghost" size="sm" className="text-destructive">
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete
+                  </Button>
+                  <div className="flex items-center gap-2">
+                    {selectedQuestionIndex > 0 && (
+                      <Button variant="outline" size="icon" className="h-8 w-8">
+                        <ChevronUp className="h-4 w-4" />
+                      </Button>
+                    )}
                     {selectedQuestionIndex < (form.questions?.length || 0) - 1 && (
-// ... existing code ...
+                      <Button variant="outline" size="icon" className="h-8 w-8">
+                        <ChevronDown className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </Tabs>
           ) : (
             <div className="p-6 h-full flex flex-col">
-// ... existing code ...
