@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 import { 
   LayoutDashboard, 
   FileEdit, 
-  LineChart, 
+  LineChart as LineChartIcon, 
   Library, 
   Settings, 
   HelpCircle,
@@ -83,7 +83,7 @@ const Sidebar = () => {
             />
             <SidebarItem 
               to="/analytics" 
-              icon={<LineChart className="h-5 w-5" />} 
+              icon={<LineChartIcon className="h-5 w-5" />} 
               label="Analytics" 
               active={isActive('/analytics')}
             />

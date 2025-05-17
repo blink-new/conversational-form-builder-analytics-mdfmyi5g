@@ -9,7 +9,9 @@ import {
   Copy, 
   Trash, 
   ExternalLink,
-  Calendar
+  Calendar,
+  LineChart as LineChartIcon,
+  FileEdit
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -144,7 +146,7 @@ const Dashboard = () => {
                       <div className="flex items-center gap-2">
                         <Link to={`/analytics/${form.id}`}>
                           <Button variant="ghost" size="sm" className="h-8">
-                            <LineChart className="h-4 w-4" />
+                            <LineChartIcon className="h-4 w-4" />
                           </Button>
                         </Link>
                         <Link to={`/builder/${form.id}`}>
@@ -220,7 +222,7 @@ const Dashboard = () => {
                       <div className="flex items-center gap-2">
                         <Link to={`/analytics/${form.id}`}>
                           <Button variant="ghost" size="sm" className="h-8">
-                            <LineChart className="h-4 w-4" />
+                            <LineChartIcon className="h-4 w-4" />
                           </Button>
                         </Link>
                         <Link to={`/builder/${form.id}`}>
