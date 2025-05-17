@@ -46,8 +46,9 @@ const FormView = () => {
     );
   }
 
-  const currentQuestion = form.questions[activeQuestion];
-  const progress = ((activeQuestion + 1) / form.questions.length) * 100;
+  // Ensure currentQuestion is defined before accessing its properties
+  const currentQuestion = form.questions && form.questions[activeQuestion] ? form.questions[activeQuestion] : null;
+  const progress = form.questions.length > 0 ? ((activeQuestion + 1) / form.questions.length) * 100 : 0;
 
   const handleAnswer = (questionId: string, value: any) => {
     setAnswers(prev => ({
@@ -218,7 +219,7 @@ const FormView = () => {
             <Check className="h-8 w-8 text-teal" />
           </div>
           <h2 className="text-2xl font-heading font-semibold text-midnight mb-4">
-            {form.settings.successMessage || 'Thank you for your submission!'}
+            {form.settings?.successMessage || 'Thank you for your submission!'}
           </h2>
           <p className="text-slate mb-8">
             Your response has been recorded.
@@ -232,10 +233,21 @@ const FormView = () => {
       </div>
     );
   }
+  
+  // Add a loading state or return null if currentQuestion is not ready
+  if (!currentQuestion) {
+     return (
+        <div className="form-container">
+            <div className="question-card text-center">
+                <p className="text-slate">Loading question...</p>
+            </div>
+        </div>
+     );
+  }
 
   return (
     <div className="form-container">
-      {form.settings.showProgressBar && (
+      {form.settings?.showProgressBar && form.questions.length > 0 && (
         <div className="max-w-xl w-full mx-auto mb-6">
           <div className="flex justify-between text-sm text-slate mb-2">
             <span>Question {activeQuestion + 1} of {form.questions.length}</span>
@@ -247,14 +259,14 @@ const FormView = () => {
       
       <div className="question-card animation-fade-in">
         <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-heading font-bold text-midnight mb-2">{form.title}</h1>
-          <p className="text-slate">{form.description}</p>
+          <h1 className="text-2xl md:text-3xl font-heading font-bold text-midnight mb-2">{form.title || 'Form Title'}</h1>
+          <p className="text-slate">{form.description || ''}</p>
         </div>
         
-        <div key={currentQuestion?.id} className="mb-8 animation-slide-in-right">
+        <div key={currentQuestion.id} className="mb-8 animation-slide-in-right">
           <h2 className="text-xl font-heading font-semibold text-midnight mb-2">
-            {currentQuestion?.title}
-            {currentQuestion?.required && <span className="text-red-500 ml-1">*</span>}
+            {currentQuestion.title}
+            {currentQuestion.required && <span className="text-red-500 ml-1">*</span>}
           </h2>
           {currentQuestion?.description && (
             <p className="text-slate mb-4">{currentQuestion.description}</p>
@@ -283,13 +295,13 @@ const FormView = () => {
             disabled={!canProceed() || isSubmitting}
             className="bg-teal hover:bg-teal/90 text-white flex items-center gap-2"
           >
-            {activeQuestion < form.questions.length - 1 ? (
+            {activeQuestion < (form.questions?.length || 0) - 1 ? (
               <>
                 Next
                 <ArrowRight className="h-4 w-4" />
               </>
             ) : (
-              form.settings.submitButtonText || 'Submit'
+              form.settings?.submitButtonText || 'Submit'
             )}
           </Button>
         </div>
